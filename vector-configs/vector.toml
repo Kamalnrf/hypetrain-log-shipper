@@ -20,7 +20,17 @@
   inputs = ["nats"]
   source = '''
   . = parse_json!(.message)
+  del(.log)
+  del(.host)
+  .message = parse_json!(.message)
+  .level = .message.level
+  del(.message.level)
   '''
+
+[transforms.filter_logs]
+  type = "filter"
+  inputs = ["log_json"]
+  condition = '.fly.app.name == "hypetrain-staging" || .fly.app.name == "hypetrain"'
 
 [sinks.fly_log_metrics_prometheus]
   type = "prometheus_exporter" # required
@@ -30,5 +40,5 @@
 
 [sinks.blackhole]
   type = "blackhole"
-  inputs = ["log_json"]
+  inputs = ["filter_logs"]
   print_interval_secs = 100000

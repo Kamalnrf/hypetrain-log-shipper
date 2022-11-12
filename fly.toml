@@ -1,5 +1,11 @@
-app = "fly-log-shipper-example"
+# fly.toml file generated for hypetrain-log-shipper on 2022-11-12T22:37:10+05:30
+
+app = "hypetrain-log-shipper"
+
+[env]
+  ORG = "hypetrain"
+  SUBJECT = "logs.>"
 
 [metrics]
-  port = 9598
   path = "/metrics"
+  port = 9598
