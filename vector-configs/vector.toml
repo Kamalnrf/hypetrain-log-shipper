@@ -30,7 +30,7 @@
 [transforms.filter_logs]
   type = "filter"
   inputs = ["log_json"]
-  condition = '.fly.app.name == "hypetrain-staging" || .fly.app.name == "hypetrain"'
+  condition = '.fly.app.name == "hypetrain-dev" || .fly.app.name == "hypetrain"'
 
 [sinks.fly_log_metrics_prometheus]
   type = "prometheus_exporter" # required
